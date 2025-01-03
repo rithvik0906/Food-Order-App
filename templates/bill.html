@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill</title>
+    <style>  body {  background-image: url('https://img.freepik.com/free-vector/hand-drawn-pizza-pattern-background_23-2150905263.jpg?semt=ais_hybrid');  }  </style>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            flex-direction: column;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        h2, ul, form, p {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        textarea {
+            width: 300px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+    <h2>Order Summary</h2>
+    <ul>
+        {% for item, quantity in order_items.items() %}
+        <li>{{ item }} x {{ quantity }} = ₹{{ menu[item] * quantity }}</li>
+        {% endfor %}
+    </ul>
+    <p>Total Amount: ₹{{ total_amount }}</p>
+
+    <form method="POST">
+        <label for="address">Delivery Address:</label><br>
+        <textarea name="address" id="address" rows="4" required></textarea><br>
+        <input type="submit" value="Confirm Order">
+    </form>
+
+    {% if address %}
+    <h3>Order confirmed!</h3>
+    <p>Delivery to: {{ address }}</p>
+    <p>Estimated Delivery Time: {{ delivery_time }}</p>
+    {% endif %}
+</body>
+</html>
